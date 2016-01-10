@@ -104,14 +104,14 @@ function saveConfig() {
 var init = function() {
     var configStr = localStorage.getItem("sbconfig");
     console.log(configStr);
-    if (!configStr)
-        return;
-    var config = JSON.parse(configStr);
-    $("#24-hour-time").prop('checked', config["24hour"]);
-    $("#color-support").prop('checked', config["color"]);
-    var stopsList = config.stops;
-    for (var i = 0; i < stopsList.length; ++i) {
-        addStop(stopsList[i].stopNum, stopsList[i].routeNums);
+    if (configStr) {
+        var config = JSON.parse(configStr);
+        $("#24-hour-time").prop('checked', config["24hour"]);
+        $("#color-support").prop('checked', config["color"]);
+        var stopsList = config.stops;
+        for (var i = 0; i < stopsList.length; ++i) {
+            addStop(stopsList[i].stopNum, stopsList[i].routeNums);
+        }
     }
     addEmptyStopIfNecessary();
 };
