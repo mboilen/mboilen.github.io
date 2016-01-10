@@ -69,7 +69,7 @@ function saveConfig() {
             hideError();
         } else {
             $('#routes_wrapper_' + index).addClass("has-error");
-            showError('Routes ' + index + " is not a valid stop number");
+            showError('Routes ' + index + " is not a valid list of routes");
             return;
         }
 
