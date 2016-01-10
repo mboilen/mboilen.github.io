@@ -20,11 +20,27 @@
 
     <div class='container'>
         <span><h2>Customizability</h2></span>
-        <div class='input-group'>
-            <span class="input-group-addon" id="time-switch">
-                <input type='checkbox' class='form-control' id='24-hour-time' aria-described-by="time-label">
+        <div class='form-group'>
+            <div class='input-group'>
+                <span class="form-control" id="time-label">24-hour time (default is 12 hour)</span>
+                <span class="input-group-addon" id="time-switch">
+                    <input type='checkbox' id='24-hour-time' aria-described-by="time-label">
+                </span>
+            </div>
+        </div>
+        <div class='form-group'>
+            <div class='input-group'>
+                <span class="form-control" id="color-label">Enable color</span>
+                <span class="input-group-addon" id="color-switch">
+                    <input type='checkbox' id='color-support' aria-described-by="color-label">
+                </span>
+            </div>
+            <span class="help-block">
+                <button data-target="#color-help" class="btn btn-link" data-toggle="collapse">Help</button>
+                <div id='color-help' class="collapse">
+                    When color is enabled, Seattle Bus will use yellow to indicate a long delay until the next bus, and red indicates the last bus of the night.  When color is disabled, then it will use "!" to indicate a long delay and "!!" to indicate the last bus of the night.
+                </div>
             </span>
-            <span class="input-group-addon" id="time-label">24-hour time (default is 12 hour)</span>
         </div>
     </div>
 
@@ -52,6 +68,7 @@
         <button type="button" class="btn btn-lg btn-success" onclick="saveConfig()">Save</button>
     </div>
     <script src='js/jquery-2.2.0.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
     <script src='js/main.js'></script>
     </body>
 </html>
