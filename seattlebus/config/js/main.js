@@ -1,9 +1,10 @@
-function formatRow(count, stop, routes) {
+function formatRow(count, stop, routes, name) {
     return "<tr id='row_" + count + "'>\n" +
                 "<td>" + count + "</td>\n" +
-                "<td><div class='form-group has-feedback' id='stop_wrapper_" + count + "'><input type='text' class='form-control' id='stop_" + count + "' placeholder='Stop' value='" + stop + "'/></div></td>\n" +
-                "<td><div class='form-group has-feedback' id='routes_wrapper_" + count + "'><input type='text' class=form-control id='routes_" + count + "' placeholder='Routes' value='" + routes + "'/></div></td>\n" +
-                "<td><button class='btn btn-default' onclick='deleteRow(" + count + ")'><span class='glyphicon glyphicon-remove-sign'/></button></td>\n" +
+                "<td><div class='form-group has-feedback' id='stop_wrapper_" + count + "'><input type='text' class='form-control no-icon' id='stop_" + count + "' placeholder='Stop' value='" + stop + "'/></div></td>\n" +
+                "<td><div class='form-group has-feedback' id='routes_wrapper_" + count + "'><input type='text' class='form-control no-icon' id='routes_" + count + "' placeholder='Routes' value='" + routes + "'/></div></td>\n" +
+                "<td><div class='form-group' id='name_wrapper_" + count + "'><input type='text' class='form-control no-icon' id='name_" + count + "' placeholder='Name (optional)' value='" + name + "'/></div></td>\n" +
+                "<td><div class='form-group' id='delete_wrapper_" + count + "'><button class='btn btn-default delete-button'  onclick='deleteRow(" + count + ")'><span class='glyphicon glyphicon-remove-sign'/></button></div></td>\n" +
             "</tr>";
 }
 
@@ -18,20 +19,20 @@ function deleteRow(rownum) {
 function addEmptyRow() {
     var table = $("#stopstable");
     var count = table.find('tbody').find('tr').length;
-    table.append(formatRow(count + 1, "", "", false));
+    table.append(formatRow(count + 1, "", "", "", false));
 }
 
 function addEmptyStopIfNecessary() {
     var table = $("#stopstable");
     var count = table.find('tbody').find('tr').length;
     if (count === 0)
-        table.append(formatRow(count + 1, "", "", false));
+        table.append(formatRow(count + 1, "", "", "", false));
 }
 
-function addStop(stop, routes) {
+function addStop(stop, routes, name) {
     var table = $("#stopstable");
     var count = table.find('tbody').find('tr').length + 1;
-    table.append(formatRow(count, stop, routes, true));
+    table.append(formatRow(count, stop, routes, name, true));
 }
 
 function showSuccess() {
@@ -90,10 +91,13 @@ function saveConfig() {
             return;
         }
 
+        var name = $('#name_' + index).prop("value");
+
         if (stop && routes) {
             stopsList.push({
                 "stopNum": stop,
-                "routeNums": routes
+                "routeNums": routes,
+                "name" : name
             });
         }
     }
@@ -127,7 +131,7 @@ var init = function() {
         $("#color-support").prop('checked', config["color"]);
         var stopsList = config.stops;
         for (var i = 0; i < stopsList.length; ++i) {
-            addStop(stopsList[i].stopNum, stopsList[i].routeNums);
+            addStop(stopsList[i].stopNum, stopsList[i].routeNums, stopsList[i].name);
         }
     }
     addEmptyStopIfNecessary();
