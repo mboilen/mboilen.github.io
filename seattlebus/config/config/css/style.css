@@ -1,0 +1,18 @@
+.has-feedback .no-icon {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.no-icon {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.delete-button {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.vertical-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(25%);
+}
